@@ -77,3 +77,7 @@ button:active {
 .digit-element {
     background-color: whitesmoke;
 }
+
+.active-button {
+  background-color: #1c5980; /* Even darker on click */
+}

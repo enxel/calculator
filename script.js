@@ -180,6 +180,7 @@ function processOperation(from) {
 function processKeyboard(e) {
     // console.log(e.key);
     const normalkeys = "0123456789+-*/.";
+
     if (normalkeys.includes(e.key)) {
         handlePressedButton(e.key);
     } else {
@@ -195,9 +196,51 @@ function processKeyboard(e) {
                 handlePressedButton("clear");
         }
     }
+
+    toggleButtonActivation(e);
+}
+
+function toggleButtonActivation(e) {
+    // console.log(e.key);
+    const digits = "0123456789";
+    const special = "+-*/.";
+
+    if (digits.includes(e.key)) {
+        document.querySelector(`#btn${e.key}`).classList.toggle("active-button");
+    } else if (special.includes(e.key)) {
+        switch(e.key) {
+            case "+":
+                document.querySelector("#addition").classList.toggle("active-button");
+                break;
+            case "-":
+                document.querySelector("#substraction").classList.toggle("active-button");
+                break;
+            case "*":
+                document.querySelector("#multiplication").classList.toggle("active-button");
+                break;
+            case "/":
+                document.querySelector("#division").classList.toggle("active-button");
+                break;
+            default:
+                document.querySelector("#period").classList.toggle("active-button");
+        }
+    } else {
+        switch(e.key) {
+            case "Backspace":
+                document.querySelector("#backspace").classList.toggle("active-button");
+                break;
+            case "Enter":
+                document.querySelector("#equal").classList.toggle("active-button");
+                break;
+            case "c":
+            case "C":
+                document.querySelector("#clear").classList.toggle("active-button");
+        }
+    }
 }
 
 const btns = Array.from( document.querySelectorAll("button") );
 btns.forEach( item => { item.addEventListener("click", handleClick) } );
 
 document.addEventListener("keydown", processKeyboard);
+document.addEventListener("keyup", toggleButtonActivation);
