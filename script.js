@@ -1,5 +1,6 @@
 let operand1 = 0, operand2, operator;
 const display = document.querySelector(".display");
+const DISPLAY_LIMIT = 25;
 
 let secondIsActive = false;
 let equalsExecuted = false;
@@ -64,13 +65,17 @@ function handlePressedButton(txt) {
             case "-":
             case "*":
             case "/":
-                addOperand(txt);
+                if (display.textContent.length < DISPLAY_LIMIT - 2) {
+                    addOperand(txt);
+                }
                 break;
             case "=":
                 processOperation(txt);
                 break;
             case ".":
-                addPointToDisplay();
+                if (display.textContent.length < DISPLAY_LIMIT) {
+                    addPointToDisplay();
+                }
                 break;
             case "<-":
                 backspace();
@@ -79,7 +84,9 @@ function handlePressedButton(txt) {
                 reset();
                 break;
             default: //digit
-                addDigitToDisplay(txt);
+                if (display.textContent.length < DISPLAY_LIMIT) {
+                    addDigitToDisplay(txt);
+                }
         }
     } else {
         equalsExecuted = false;
