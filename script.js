@@ -1,5 +1,6 @@
 let operand1 = 0, operand2, operator;
 const display = document.querySelector(".display");
+
 let secondIsActive = false;
 let equalsExecuted = false;
 
@@ -20,7 +21,7 @@ function divide(a, b) {
 }
 
 function operate(num1, op, num2) {
-    console.log("From operate: " + op);
+    // console.log("From operate: " + op);
 
     let answer;
 
@@ -37,9 +38,6 @@ function operate(num1, op, num2) {
         case "/":
             if (num2 !== 0) {
                 answer = divide(num1, num2);
-                if (!Number.isInteger(answer)) {
-                    answer = Math.round(answer * 1000) / 1000;
-                }
             } else {
                 alert("No, no, no... Don't be naughty!");
                 reset();
@@ -47,12 +45,19 @@ function operate(num1, op, num2) {
             }
     }
 
+    if (!Number.isInteger(answer)) {
+        answer = Math.round(answer * 1000) / 1000;
+    }
+
     return answer;
 }
 
 function handleClick(e) {
     // console.log(e.target.textContent);
-    let txt = e.target.textContent;
+    handlePressedButton(e.target.textContent);
+}
+
+function handlePressedButton(txt) {
     if (!equalsExecuted) {
         switch(txt) {
             case "+":
@@ -150,11 +155,11 @@ function defineData() {
         } else {
             operand1 = Number(display.textContent);
         }
-        console.log(operand1);
+        // console.log(operand1);
     } else {
         operand2 = Number(display.textContent.split(" ")[2]);
-        console.log(operand1);
-        console.log(operand2);
+        // console.log(operand1);
+        // console.log(operand2);
     }
 }
 
@@ -172,5 +177,27 @@ function processOperation(from) {
     }
 }
 
+function processKeyboard(e) {
+    // console.log(e.key);
+    const normalkeys = "0123456789+-*/.";
+    if (normalkeys.includes(e.key)) {
+        handlePressedButton(e.key);
+    } else {
+        switch(e.key) {
+            case "Backspace":
+                handlePressedButton("<-");
+                break;
+            case "Enter":
+                handlePressedButton("=");
+                break;
+            case "c":
+            case "C":
+                handlePressedButton("clear");
+        }
+    }
+}
+
 const btns = Array.from( document.querySelectorAll("button") );
 btns.forEach( item => { item.addEventListener("click", handleClick) } );
+
+document.addEventListener("keydown", processKeyboard);
