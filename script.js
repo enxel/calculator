@@ -1,4 +1,4 @@
-let operand1 = 0, operand2, operator;
+let operand1 = 0, operand2;
 const display = document.querySelector(".display");
 const DISPLAY_LIMIT = 25;
 
@@ -41,8 +41,7 @@ function operate(num1, op, num2) {
                 answer = divide(num1, num2);
             } else {
                 alert("No, no, no... Don't be naughty!");
-                reset();
-                answer = 0;
+                answer = -9999;
             }
     }
 
@@ -50,6 +49,7 @@ function operate(num1, op, num2) {
         answer = Math.round(answer * 1000) / 1000;
     }
     if (`${answer}`.length > DISPLAY_LIMIT) {
+        alert("Result exceeds display capacity.");
         answer = -9999;
     }
 
@@ -116,6 +116,7 @@ function reset() {
     display.textContent = "0";
     operand1 = 0;
     secondIsActive = false;
+    equalsExecuted = false;
 }
 
 function backspace() {
