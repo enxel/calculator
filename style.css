@@ -1,0 +1,79 @@
+body {
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+.container {
+    background-color: azure;
+    width: 300px;
+    height: 380px;
+    border-radius: 5px;
+}
+
+.display {
+    background-color: white;
+    border: 3px solid black;
+    font-size: larger;
+    font-weight: 500;
+    text-align: right;
+    margin: 20px;
+    padding: 0px 5px;
+}
+
+.buttons {
+    height: 300px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    width: 50px;
+    height: 50px;
+    margin: 5px 0px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+button:hover {
+  background-color: #2980b9; /* Darker blue on hover */
+}
+
+button:active {
+  background-color: #1c5980; /* Even darker on click */
+}
+
+.small-button {
+    max-height: 50px;
+    margin-bottom: 5px;
+}
+
+.large-button {
+    flex: 2;
+}
+
+.operator {
+    background-color: lightyellow;
+}
+
+.equal {
+    background-color: lightblue;
+}
+
+.clear {
+    background-color: lightcoral;
+}
+
+.backspace {
+    background-color: lightsalmon;
+}
+
+.digit-element {
+    background-color: whitesmoke;
+}
