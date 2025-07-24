@@ -49,6 +49,9 @@ function operate(num1, op, num2) {
     if (!Number.isInteger(answer)) {
         answer = Math.round(answer * 1000) / 1000;
     }
+    if (`${answer}`.length > DISPLAY_LIMIT) {
+        answer = -9999;
+    }
 
     return answer;
 }
@@ -122,6 +125,7 @@ function backspace() {
         } else {
             if (display.textContent.at(-1) === " ") {
                 display.textContent = display.textContent.slice(0, display.textContent.length - 3);
+                secondIsActive = false;
             } else {
                 display.textContent = display.textContent.slice(0, display.textContent.length - 1);
                 if (display.textContent.at(-1) === " ") {
